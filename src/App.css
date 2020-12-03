@@ -1,4 +1,25 @@
+#city{
+  margin-top: 10px; 
+  text-align: center;
+
+}
 #weather .container{
-  background-color: grey;
+  background-color: #616161ad;
   margin-top: 25px;
+  box-shadow: 1px 2px 20px 0px #000;
+  text-align: center;
+}
+
+#weather .dayTime{
+  background: white;
+  color: black;
+  font-size: large;
+}
+
+#weather .weatherTemp{
+  align-self: center;
+}
+
+#weather .weatherDescri{
+  align-self: center;
 }
