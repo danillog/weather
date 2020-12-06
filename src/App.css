@@ -1,25 +1,22 @@
 #city{
   margin-top: 10px; 
   text-align: center;
-
 }
-#weather .container{
-  background-color: #616161ad;
-  margin-top: 25px;
-  box-shadow: 1px 2px 20px 0px #000;
-  text-align: center;
+#menu {
+  position: sticky;
+  top: 0px;
+  z-index: 100;
+  padding-top: 20px;
 }
 
-#weather .dayTime{
-  background: white;
+.menu{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.hora{
   color: black;
-  font-size: large;
 }
-
-#weather .weatherTemp{
-  align-self: center;
-}
-
-#weather .weatherDescri{
-  align-self: center;
+.semana{
+  color: black
 }

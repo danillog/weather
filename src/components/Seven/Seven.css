@@ -1,0 +1,32 @@
+#weather{
+  padding: 18px;
+}
+
+#weather .container{
+  background-color: #616161ad;
+  margin-top: 25px;
+  box-shadow: 1px 2px 20px 0px #000;
+  text-align: center;
+}
+
+#weather .dayTime{
+  background: white;
+  color: black;
+  font-size: large;
+}
+#weather .dayWeather{
+  margin-bottom: 10px;
+}
+#weather .weatherTemp{
+  align-self: center;
+  font-size: large;
+}
+
+#weather .weatherDescri{
+  align-self: center;
+}
+
+#weather .detailsWeather h3{
+  font-size: large;
+}
+
