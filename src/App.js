@@ -5,22 +5,27 @@ import Alert from './components/Alert';
 import Hourly from './components/Hourly';
 import Seven from './components/Seven';
 import nominatim from './nominatim';
+import openWeather from './openWeather';
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state ={
-      weatherWeek : <Seven latitude="-23.5329" longitude="-46.6395" />,
-      weatherHour: '',
+      weatherWeek : '',
+      weatherHour: 'disable',
       activeWeek: 'active',
       activeHour: '',
       city: '',
-      lat: '',
-      lon: ''
+      lat: '0',
+      lon: '0',
+      weather: false,
+      options: [],
+      typeInterval: 0,
     }
   this.changeContentHour = this.changeContentHour.bind(this);
   this.sucessCurrentPosition = this.sucessCurrentPosition.bind(this);
-  this.searchCity = this.searchCity.bind(this);
+  this.getCity = this.getCity.bind(this);
+  this.changecity = this.changecity.bind(this);
   }
 
   componentDidMount(){
@@ -35,80 +40,106 @@ class App extends Component {
     }else{
       color = "#5223e2"
     }
-
     document.body.style.backgroundColor = color;
     document.getElementById("menu").style.backgroundColor = color;
     navigator.geolocation.getCurrentPosition(this.sucessCurrentPosition)
+
+  }
+
+  async weatherNow(lat, lon){
+    let weather = await openWeather.weatherbyLocation(lat, lon);
+    return weather;
   }
 
   async  sucessCurrentPosition(pos){  
     var crd = pos.coords;
-    let lat = crd.latitude
-    let lon =  crd.longitude
-    let city = await nominatim.acessLocation(lat, lon)
-    
+    let local ={lat: crd.latitude , lon:crd.longitude}
+    let city = await nominatim.acessLocation(local.lat, local.lon)
+    let weather = await openWeather.weatherbyLocation(local.lat, local.lon);
 
     this.setState({
-      lat : lat,
-      lon: lon,
       city: city.["0"].address.city,
-      weather : <Seven latitude={lat} longitude={lon} />
+      lat: local.lat,
+      lon: local.lon,
+      weather: weather
     });
   }
 
   changeContentHour(){
     this.setState({
-      weatherHour: <Hourly latitude={this.state.lat} longitude={this.state.lon}  />,
-      weatherWeek: '',
+      weatherHour: '',
+      weatherWeek: 'disable',
       activeWeek: '',
       activeHour: 'active'
     })
   }
   changeContentWeek(){
     this.setState({
-      weatherWeek: <Seven latitude={this.state.lat} longitude={this.state.lon} />,
-      weatherHour: '',
+      weatherHour: 'disable',
+      weatherWeek: '',
       activeWeek: 'active',
       activeHour: ''
     })
   }
-  async searchCity(e){
+
+  async getCity(e){
     e.preventDefault();
+
+    this.setState({weather:false})
 
     let city = this.state.city
     let cityLocation = await nominatim.searchByCity(city)
     let lat = cityLocation.["0"].lat;
     let lon = cityLocation.["0"].lon;
-    let weatherWeek = this.state.weatherWeek;
-    let weatherHour = this.state.weatherHour;
+    let weather = await this.weatherNow(lat, lon)
 
-    if(weatherHour !== ''){
-      this.setState({
-        lat: lat,
-        lon: lon,
-        weatherHour: <Hourly latitude={lat} longitude={lon}  />
-      })
-    }else  if(weatherWeek !== '' ){
-      this.setState({
-        lat: lat,
-        lon: lon,
-        weatherWeek: <Seven latitude={lat} longitude={lon} />
-      })
-    }
-
+    this.setState({
+      lat: lat,
+      lon: lon,
+      weather: weather
+    })
   }
 
+  changecity(typed){
+    let listCity = []
+    
+    this.setState({
+      city: typed,
+    })
+    
+    if(this.state.typeInterval) clearTimeout(this.state.typeInterval)
+    this.state.typeInterval = setTimeout( async () => {
+      listCity = await this.searchCity(typed);
+      this.setState({options: listCity})
+    },200)
+  }
+
+  async searchCity(typed){
+    let typedSearch = await nominatim.seekingCity(typed)
+    let listResult = []
+    typedSearch.map((city) => {
+      listResult.push(`${city.address.city}, ${city.address.state}, ${city.address.country}`)    
+    })
+    return listResult
+  }
 
   render(){
     return(
       <div className="App">
         <div id="menu">
           <div className="justify-content-center row"> 
-            <form onSubmit={this.searchCity} id="buscar" >
-              <input type="txt" autoComplete="off" autoFocus value={this.state.city}
-              onChange={(e) => this.setState({city: e.target.value})}  placeholder="Digite sua cidade" 
-              />
-              <button type="submit"> Buscar </button>
+            <form onSubmit={this.getCity} id="buscar" >
+              <input type="txt" autoComplete="off" list="datalistOptions" autoFocus value={this.state.city}
+              onChange={(e) => this.changecity(e.target.value)} placeholder="Digite sua cidade" />
+              <div id="datalistOptions" >
+                {this.state.options.map((option, index) =>{
+                  return(
+                    <div className="cityOption" key={index} onClick={() => this.changecity(option)}  >
+                      <button>  {option} </button>
+                   </div>
+                  )}  
+                )}
+              </div>
             </form>
           </div>
           <ul className="nav nav-tabs justify-content-center menu ">
@@ -123,9 +154,13 @@ class App extends Component {
           </ul>
         </div>
         <div id="conteudo">
-          <Alert latitude={this.state.lat} longitude={this.state.lon} />
-          {this.state.weatherWeek}
-          {this.state.weatherHour}
+          <Alert weather={this.state.weather}/>
+          <div className={this.state.weatherWeek}>
+            <Seven weather={this.state.weather} />
+          </div>
+          <div className={this.state.weatherHour}>
+            <Hourly weather={this.state.weather}  />
+          </div>
         </div>
 
 

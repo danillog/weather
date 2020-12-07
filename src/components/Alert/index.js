@@ -16,9 +16,9 @@ class Alert extends Component{
 
   render(){
     
-    return this.state.weatherAlert !== false & this.state.weatherAlert !== undefined  & this.state.weatherAlert.alerts !== undefined ?(
+    return this.props.weather !== false & this.props.weather !== undefined  & this.props.weather.alerts !== undefined ?(
         <div id="alert">
-        { this.state.weatherAlert.alerts.map((alert, index ) => {
+        { this.props.weather.alerts.map((alert, index ) => {
           return( 
             <div className="container" key={ index } >    
               <div className="row weatherAlert justify-content-md-center">

@@ -1,25 +1,14 @@
 import { fromUnixTime, lightFormat } from 'date-fns';
 import { Component } from 'react';
-import openWeather from '../../openWeather';
 
 
 class Hourly extends Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      weather: false
-    }
-  }
-  async componentDidMount(){
-    let hourly = await openWeather.weatherbyLocation(this.props.latitude, this.props.longitude);
-    this.setState({ weather: hourly})
-  }
 
   render(){
     
-    return this.state.weather !== false & this.state.weather !== undefined ?(
+    return this.props.weather !== false & this.props.weather !== undefined ?(
         <div id="weather">
-        { this.state.weather.hourly.map((hour, index ) => {
+        { this.props.weather.hourly.map((hour, index ) => {
           let hourTime = lightFormat(fromUnixTime(hour.dt), 'HH:mm')
           let dayHour = lightFormat(fromUnixTime(hour.dt), 'dd/MM')
           let prop = hour.pop * 100;

@@ -20,3 +20,22 @@
 .semana{
   color: black
 }
+.disable {
+  display: none;
+}
+
+#datalistOptions .cityOption{
+  background-color: white;
+}
+
+#datalistOptions .cityOption button{
+  background-color: white;
+  border:none;
+
+}
+
+#datalistOptions .cityOption button:hover{
+  background-color: rgba(218, 0, 0, 0.371);
+  border:none;
+  
+}

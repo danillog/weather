@@ -1,35 +1,18 @@
 import { fromUnixTime, getDay, lightFormat } from 'date-fns';
 import { Component } from 'react';
-import openWeather from '../../openWeather';
 import './Seven.css';
 
 class Seven extends Component{
   constructor(props){
     super(props);
     this.state = {
-      weather: false,
       week: ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'],
     }
-    this.createList = this.createList.bind(this)
   }
-  componentDidMount(){
-    this.createList();
-  }
-
-  async createList(){
-    let sevenDays = await openWeather.weatherbyLocation(this.props.latitude, this.props.longitude);
-    this.setState({ 
-      weather: sevenDays,
-      previousLat: this.props.latitude,
-      previousLon: this.props.longitude
-    })
-  }
-
   render(){
-    
-    return this.state.weather !== false & this.state.weather !== undefined ?(
+    return this.props.weather !== false & this.props.weather !== undefined ?(
         <div id="weather">
-        { this.state.weather.daily.map((day, index ) => {
+        { this.props.weather.daily.map((day, index ) => {
           let dayTime = lightFormat(fromUnixTime(day.dt), 'dd/MM/yyyy')
           let dayInWeek = getDay(fromUnixTime(day.dt))
           let week = this.state.week
