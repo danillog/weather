@@ -38,7 +38,7 @@ class App extends Component {
     }else if( dateNow < 17){
       color = "#e29623"
     }else{
-      color = "#5223e2"
+      color = "#0c012d"
     }
     document.body.style.backgroundColor = color;
     document.getElementById("menu").style.backgroundColor = color;
@@ -122,7 +122,6 @@ class App extends Component {
     })
     return listResult
   }
-
   render(){
     return(
       <div className="App">
@@ -142,16 +141,6 @@ class App extends Component {
               </div>
             </form>
           </div>
-          <ul className="nav nav-tabs justify-content-center menu ">
-            <li className="nav-item">
-              <button className={`nav-link semana ${this.state.activeWeek}`} onClick={() => this.changeContentWeek() }
-              > 8 dias </button>
-            </li>
-            <li className="nav-item">
-              <button className={`nav-link hora ${this.state.activeHour}`} onClick={()=> this.changeContentHour() } 
-              >Hora em hora </button>
-            </li>
-          </ul>
         </div>
         <div id="conteudo">
           <Alert weather={this.state.weather}/>

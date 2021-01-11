@@ -1,5 +1,9 @@
-import { fromUnixTime, getDay, lightFormat } from 'date-fns';
-import { Component } from 'react';
+import { fromUnixTime, getDay, isSameDay, lightFormat } from 'date-fns';
+import React, { Component } from 'react';
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+import Loading from '../Loading';
 import './Seven.css';
 
 class Seven extends Component{
@@ -7,9 +11,43 @@ class Seven extends Component{
     super(props);
     this.state = {
       week: ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'],
+     
     }
   }
   render(){
+    var settings = {
+      dots: false,
+      infinite: false,
+      speed: 500,
+      slidesToShow: 12,
+      slidesToScroll: 12,
+      initialSlide: 0,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 6,
+            slidesToScroll: 6,
+            infinite: true,
+            dots: false
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3
+          }
+        }
+      ]
+    };
     return this.props.weather !== false & this.props.weather !== undefined ?(
         <div id="weather">
         { this.props.weather.daily.map((day, index ) => {
@@ -52,10 +90,30 @@ class Seven extends Component{
                   <h3>{day.rain}mm </h3>
                 </div>
               </div>
+              <Slider { ...settings}  >
+                  {this.props.weather.hourly.map((hour, index ) => {
+                    let hourTime = lightFormat(fromUnixTime(hour.dt), 'HH:mm')
+                    let rain = hour.rain
+                    if(hour.rain === undefined || hour.rain === ''){
+                      rain = 0
+                    }else{
+                      rain = rain["1h"]
+                    } 
+                    if( isSameDay(fromUnixTime(hour.dt), fromUnixTime(day.dt))){
+                      return(
+                        <div className="weatherHour"> 
+                          <img src={`https://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`} alt="Imagm do clima nesse horário" />
+                          <span> {hour.temp} ºC </span>
+                          <span> { hourTime }h </span>
+                        </div>
+                      )
+                    }
+                  })}
+              </Slider>  
             </div>
           )})}
         </div>
-    ) :  <h1> Carregando... </h1>
+    ) :  <Loading />
   }
 }
 

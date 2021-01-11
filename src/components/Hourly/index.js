@@ -1,11 +1,11 @@
 import { fromUnixTime, lightFormat } from 'date-fns';
 import { Component } from 'react';
+import Loading from "../Loading";
 
 
 class Hourly extends Component{
 
   render(){
-    
     return this.props.weather !== false & this.props.weather !== undefined ?(
         <div id="weather">
         { this.props.weather.hourly.map((hour, index ) => {
@@ -48,7 +48,7 @@ class Hourly extends Component{
             </div>
           )})}
         </div>
-    ) :  <h1> Carregando... </h1>
+    ) : <Loading />
   }
 }
 

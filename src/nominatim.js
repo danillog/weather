@@ -1,6 +1,4 @@
 class nominatim{
-  constructor(){
-  }
 
   acessCity(city){
     let route = `https://nominatim.openstreetmap.org/?addressdetails=1&q=${city}&format=json&limit=1`
@@ -25,7 +23,8 @@ class nominatim{
       if(city.address.city !== undefined){
         return city;
       }
-    })
+    });
+    
     return citys
   }
 

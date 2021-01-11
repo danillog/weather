@@ -1,3 +1,5 @@
+
+
 #weather{
   padding: 18px;
 }
@@ -30,3 +32,21 @@
   font-size: large;
 }
 
+.weatherHour{
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(0 0 0 / 55%);
+  padding-top: 10px;
+
+}
+
+.weatherHour img{
+  width: 80%;
+  margin: 0 auto;
+  background-color: #adadad8c;
+  border-radius: 50%;
+}
+
+.slick-slide{
+  padding: 5px;
+}
