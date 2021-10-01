@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import openWeather from '../../openWeather';
+import openWeather from '../../api/openWeather';
 import './alert.css';
 
 class Alert extends Component{

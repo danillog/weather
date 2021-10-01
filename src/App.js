@@ -1,11 +1,11 @@
 import { getHours } from 'date-fns';
 import React, { Component } from 'react';
+import nominatim from './api/nominatim';
+import openWeather from './api/openWeather';
 import './App.css';
 import Alert from './components/Alert';
 import Hourly from './components/Hourly';
 import Seven from './components/Seven';
-import nominatim from './nominatim';
-import openWeather from './openWeather';
 
 class App extends Component {
   constructor(props){
