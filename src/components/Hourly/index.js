@@ -4,7 +4,6 @@ import Loading from "../Loading";
 
 
 class Hourly extends Component{
-
   render(){
     return this.props.weather !== false & this.props.weather !== undefined ?(
         <div id="weather">

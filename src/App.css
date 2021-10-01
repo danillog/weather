@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
+
 #city{
   margin-top: 10px; 
   text-align: center;
@@ -6,14 +9,23 @@
   position: sticky;
   top: 0px;
   z-index: 100;
-  padding-top: 20px;
+  align-content: center;
+  padding: 30px;
 }
 
 .menu{
   margin-top: 20px;
   margin-bottom: 20px;
 }
+#titulo{
+  font-family: 'Poppins', sans-serif;
+}
 
+button, input, optgroup, select, textarea{
+  width: 100%;
+  text-align: center;
+  height: 30px;
+}
 .hora{
   color: black;
 }
@@ -38,3 +50,27 @@
   border:none;
   
 }
+.card-body{
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+  justify-content: center;
+}
+.card-body p{
+  padding:0 5px 0 5px;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  font-size: large;
+}
+.card-body .footerP a{
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+  transition:  2s;
+}
+.card-body:hover .footerP a{
+  transition:  2s;
+  color: black;
+  background-color: white;
+}
+

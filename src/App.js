@@ -31,17 +31,29 @@ class App extends Component {
   componentDidMount(){
     let dateNow = getHours(new Date())
     let color = "grey";
+    let colorMenu = "black";
+    let colorFooter = "black";
+    
     if(dateNow < 8 ){
-      color = "#e8971c"
+      color = "#e8971c";
+      colorMenu= "linear-gradient(0deg, rgba(255,255,255,0) 1%, rgba(168,109,19,1) 37%)";
+      colorFooter= "linear-gradient(180deg, rgba(255,255,255,0) 1%, rgba(168,109,19,1) 37%)";
     }else if(dateNow < 15) {
-      color = "#2cc8d0"
+      color = "#2cc8d0";
+      colorMenu = "linear-gradient(0deg, rgba(255,255,255,0) 1%, rgba(34,116,120,1) 37%)";
+      colorFooter = "linear-gradient(180deg, rgba(255,255,255,0) 1%, rgba(34,116,120,1) 37%)";
     }else if( dateNow < 17){
-      color = "#e29623"
+      color = "#e29623";
+      colorMenu= "linear-gradient(0deg, rgba(255,255,255,0) 1%, rgba(168,109,19,1) 37%)";
+      colorFooter= "linear-gradient(180deg, rgba(255,255,255,0) 1%, rgba(168,109,19,1) 37%)";
     }else{
-      color = "#0c012d"
+      color = "#0c012d";
+      colorMenu = "linear-gradient(0deg, rgb(12 1 45) 1%, rgb(54, 21, 153) 80%)";
+      colorFooter = "linear-gradient(180deg, rgb(12 1 45) 1%, rgb(54, 21, 153) 80%)"
     }
     document.body.style.backgroundColor = color;
-    document.getElementById("menu").style.backgroundColor = color;
+    document.getElementById("menu").style.background = colorMenu;
+    document.getElementById("footer").style.background = colorFooter;
     navigator.geolocation.getCurrentPosition(this.sucessCurrentPosition)
 
   }
@@ -83,6 +95,7 @@ class App extends Component {
   }
 
   async getCity(e){
+    //para não atualizar a página 
     e.preventDefault();
 
     this.setState({weather:false})
@@ -126,20 +139,25 @@ class App extends Component {
     return(
       <div className="App">
         <div id="menu">
-          <div className="justify-content-center row"> 
-            <form onSubmit={this.getCity} id="buscar" >
-              <input type="txt" autoComplete="off" list="datalistOptions" autoFocus value={this.state.city}
-              onChange={(e) => this.changecity(e.target.value)} placeholder="Digite sua cidade" />
-              <div id="datalistOptions" >
-                {this.state.options.map((option, index) =>{
-                  return(
-                    <div className="cityOption" key={index} onClick={() => this.changecity(option)}  >
-                      <button>  {option} </button>
-                   </div>
-                  )}  
-                )}
-              </div>
-            </form>
+          <div className="align-items-center row"> 
+          <div className="col">
+            <h1 id="titulo"> DG-WEATHER</h1>
+          </div>
+            <div className="col"> 
+              <form onSubmit={this.getCity} id="buscar" >
+                <input type="txt" autoComplete="off" list="datalistOptions" autoFocus value={this.state.city}
+                onChange={(e) => this.changecity(e.target.value)} placeholder="Digite sua cidade" />
+                <div id="datalistOptions" >
+                  {this.state.options.map((option, index) =>{
+                    return(
+                      <div className="cityOption" key={index} onClick={() => this.changecity(option)}  >
+                        <button>  {option} </button>
+                    </div>
+                    )}  
+                  )}
+                </div>
+              </form>
+            </div>
           </div>
         </div>
         <div id="conteudo">
@@ -151,7 +169,14 @@ class App extends Component {
             <Hourly weather={this.state.weather}  />
           </div>
         </div>
-
+        <footer id="footer"> 
+          <div class="">
+            <div class="card-body">
+              <p className="footerP" >©COPYRIGHT 2021. ALL RIGHTS RESERVED.</p>
+              <p className="footerP" > Create by <a href="https://danilogomes.dev" target="_blank" > Danillo </a> </p>
+            </div>
+          </div>
+        </footer>
 
       </div>
     )
