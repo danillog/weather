@@ -11,10 +11,6 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state ={
-      weatherWeek : '',
-      weatherHour: 'disable',
-      activeWeek: 'active',
-      activeHour: '',
       city: '',
       lat: '0',
       lon: '0',
@@ -22,7 +18,6 @@ class App extends Component {
       options: [],
       typeInterval: 0,
     }
-  this.changeContentHour = this.changeContentHour.bind(this);
   this.sucessCurrentPosition = this.sucessCurrentPosition.bind(this);
   this.getCity = this.getCity.bind(this);
   this.changecity = this.changecity.bind(this);
@@ -72,22 +67,6 @@ class App extends Component {
     });
   }
 
-  changeContentHour(){
-    this.setState({
-      weatherHour: '',
-      weatherWeek: 'disable',
-      activeWeek: '',
-      activeHour: 'active'
-    })
-  }
-  changeContentWeek(){
-    this.setState({
-      weatherHour: 'disable',
-      weatherWeek: '',
-      activeWeek: 'active',
-      activeHour: ''
-    })
-  }
 
   async getCity(e){
     //para não atualizar a página 
@@ -157,7 +136,7 @@ class App extends Component {
         </div>
         <div id="conteudo">
           <Alert weather={this.state.weather}/>
-          <div className={this.state.weatherWeek}>
+          <div>
             <Seven weather={this.state.weather} />
           </div>
         </div>
