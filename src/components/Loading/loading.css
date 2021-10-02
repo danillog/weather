@@ -1,3 +1,12 @@
+.box{
+	margin: 20px 0 12% 0;
+}
+.loading{
+	font-family: 'Poppins', sans-serif;
+	text-align: center;
+	font-size: x-large;
+}
+
 .center {
   position: relative;
 	width: 220px;

@@ -36,24 +36,20 @@ class App extends Component {
     
     if(dateNow < 8 ){
       color = "#e8971c";
-      colorMenu= "linear-gradient(0deg, rgba(255,255,255,0) 1%, rgba(168,109,19,1) 37%)";
-      colorFooter= "linear-gradient(180deg, rgba(255,255,255,0) 1%, rgba(168,109,19,1) 37%)";
+      colorMenu= "rgba(168,109,19,1)";
     }else if(dateNow < 15) {
       color = "#2cc8d0";
-      colorMenu = "linear-gradient(0deg, rgba(255,255,255,0) 1%, rgba(34,116,120,1) 37%)";
-      colorFooter = "linear-gradient(180deg, rgba(255,255,255,0) 1%, rgba(34,116,120,1) 37%)";
+      colorMenu = "rgba(34,116,120,1)";
     }else if( dateNow < 17){
       color = "#e29623";
-      colorMenu= "linear-gradient(0deg, rgba(255,255,255,0) 1%, rgba(168,109,19,1) 37%)";
-      colorFooter= "linear-gradient(180deg, rgba(255,255,255,0) 1%, rgba(168,109,19,1) 37%)";
+      colorMenu= "rgba(168,109,19,1)";
     }else{
       color = "#0c012d";
       colorMenu = "linear-gradient(0deg, rgb(12 1 45) 1%, rgb(54, 21, 153) 80%)";
-      colorFooter = "linear-gradient(180deg, rgb(12 1 45) 1%, rgb(54, 21, 153) 80%)"
     }
     document.body.style.backgroundColor = color;
     document.getElementById("menu").style.background = colorMenu;
-    document.getElementById("footer").style.background = colorFooter;
+    document.getElementById("footer").style.background = colorMenu;
     navigator.geolocation.getCurrentPosition(this.sucessCurrentPosition)
 
   }
