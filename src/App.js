@@ -4,6 +4,7 @@ import nominatim from './api/nominatim';
 import openWeather from './api/openWeather';
 import './App.css';
 import Alert from './components/Alert';
+import Footer from './components/Footer';
 import Hourly from './components/Hourly';
 import Seven from './components/Seven';
 
@@ -32,7 +33,6 @@ class App extends Component {
     let dateNow = getHours(new Date())
     let color = "grey";
     let colorMenu = "black";
-    let colorFooter = "black";
     
     if(dateNow < 8 ){
       color = "#e8971c";
@@ -165,14 +165,7 @@ class App extends Component {
             <Hourly weather={this.state.weather}  />
           </div>
         </div>
-        <footer id="footer"> 
-          <div class="">
-            <div class="card-body">
-              <p className="footerP" >©COPYRIGHT 2021. ALL RIGHTS RESERVED.</p>
-              <p className="footerP" > Create by <a href="https://danilogomes.dev" target="_blank" > Danillo </a> </p>
-            </div>
-          </div>
-        </footer>
+       <Footer />
 
       </div>
     )

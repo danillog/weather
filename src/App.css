@@ -56,21 +56,3 @@ button, input, optgroup, select, textarea{
   align-content: space-between;
   justify-content: center;
 }
-.card-body p{
-  padding:0 5px 0 5px;
-  font-family: 'Poppins', sans-serif;
-  color: white;
-  font-size: large;
-}
-.card-body .footerP a{
-  text-decoration: none;
-  font-weight: bold;
-  color: white;
-  transition:  2s;
-}
-.card-body:hover .footerP a{
-  transition:  2s;
-  color: black;
-  background-color: white;
-}
-
