@@ -23,19 +23,7 @@ class Menu extends Component{
             <h2> TEST</h2>
           </div>
             <div className="col"> 
-              <form onSubmit={this.getCity} id="buscar" >
-                <input type="txt" autoComplete="off" list="datalistOptions" autoFocus value={this.state.city}
-                onChange={(e) => this.changecity(e.target.value)} placeholder="Digite sua cidade" />
-                <div id="datalistOptions" >
-                  {this.state.options.map((option, index) =>{
-                    return(
-                      <div className="cityOption" key={index} onClick={() => this.changecity(option)}  >
-                        <button>  {option} </button>
-                    </div>
-                    )}  
-                  )}
-                </div>
-              </form>
+            
             </div>
           </div>
         </div>

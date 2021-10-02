@@ -5,7 +5,6 @@ import openWeather from './api/openWeather';
 import './App.css';
 import Alert from './components/Alert';
 import Footer from './components/Footer';
-import Hourly from './components/Hourly';
 import Seven from './components/Seven';
 
 class App extends Component {
@@ -160,9 +159,6 @@ class App extends Component {
           <Alert weather={this.state.weather}/>
           <div className={this.state.weatherWeek}>
             <Seven weather={this.state.weather} />
-          </div>
-          <div className={this.state.weatherHour}>
-            <Hourly weather={this.state.weather}  />
           </div>
         </div>
        <Footer />
