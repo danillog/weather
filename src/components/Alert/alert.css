@@ -3,7 +3,7 @@
 }
 
 #alert .container{
-  background-color: #a009097a;
+  background-color: #ff930c7a;
 }
 
 #alert .weatherAlert{
@@ -17,4 +17,5 @@
 
 #alert .detailAlert h3{
   font-size: large;
+  padding: 11px;
 }
