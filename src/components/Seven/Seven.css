@@ -27,7 +27,10 @@
 #weather .weatherDescri{
   align-self: center;
 }
-
+#weather .detailsWeather{
+    background: #34313a;
+    padding: 10px;
+}
 #weather .detailsWeather h3{
   font-size: large;
 }
@@ -49,4 +52,14 @@
 
 .slick-slide{
   padding: 5px;
+}
+
+.tempDay{
+  margin: 10px 0 10px 0;
+  display: block;
+  font-size: large;
+}
+.timeDay{
+  display: block;
+  background: black;
 }

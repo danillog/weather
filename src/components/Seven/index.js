@@ -73,7 +73,7 @@ class Seven extends Component{
                   <h3> { day.weather[0].description } </h3>
                 </div>
               </div>
-              <div className="row detailsWeather justify-content-md-center">
+              <div className="row detailsWeather align-items-center">
                 <div className="col col-lg-2 tempTime">
                   <h3>Manhã : {day.temp.morn.toFixed(0)}ºC </h3>
                 </div>
@@ -103,8 +103,8 @@ class Seven extends Component{
                       return(
                         <div className="weatherHour"> 
                           <img src={`https://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`} alt="Imagm do clima nesse horário" />
-                          <span> {hour.temp.toFixed(0)} ºC </span>
-                          <span> { hourTime }h </span>
+                          <span className="tempDay"> {hour.temp.toFixed(0)} ºC </span>
+                          <span className="timeDay"> { hourTime }h </span>
                         </div>
                       )
                     }
