@@ -113,7 +113,7 @@ class App extends Component {
     return(
       <div className="App">
         <div id="menu">
-          <div className="align-items-center row"> 
+          <div className="align-items-center row header"> 
           <div className="col">
             <h1 id="titulo"> DG-WEATHER</h1>
           </div>

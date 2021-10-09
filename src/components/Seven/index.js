@@ -67,7 +67,7 @@ class Seven extends Component{
                   <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} alt="Icone de clima atual" />
                 </div>
                 <div className="col col-lg-2 weatherTemp">
-                  <p>Min { day.temp.min }ºC </p> <p>Max { day.temp.max }ºC </p>
+                  <p>Min { day.temp.min.toFixed(0) }ºC </p> <p>Max { day.temp.max.toFixed(0) }ºC </p>
                 </div>
                 <div className="col-md-auto weatherDescri ">
                   <h3> { day.weather[0].description } </h3>
@@ -75,16 +75,16 @@ class Seven extends Component{
               </div>
               <div className="row detailsWeather justify-content-md-center">
                 <div className="col col-lg-2 tempTime">
-                  <h3>Manhã : {day.temp.morn}ºC </h3>
+                  <h3>Manhã : {day.temp.morn.toFixed(0)}ºC </h3>
                 </div>
                 <div className="col col-lg-2 tempTime">
-                  <h3>Tarde : {day.temp.day}ºC </h3>
+                  <h3>Tarde : {day.temp.day.toFixed(0)}ºC </h3>
                 </div>
                 <div className="col col-lg-2 tempTime">
-                  <h3>Noite : {day.temp.eve}ºC </h3>
+                  <h3>Noite : {day.temp.eve.toFixed(0)}ºC </h3>
                 </div>
                 <div className="col col-lg-3 prob">
-                  <h3> Probabilidade chuva: {day.pop * 100}% </h3>
+                  <h3> Probabilidade chuva: {(day.pop * 100).toFixed(0)}% </h3>
                 </div>
                 <div className="col col-lg-3 prob">
                   <h3>{day.rain}mm </h3>
@@ -103,7 +103,7 @@ class Seven extends Component{
                       return(
                         <div className="weatherHour"> 
                           <img src={`https://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`} alt="Imagm do clima nesse horário" />
-                          <span> {hour.temp} ºC </span>
+                          <span> {hour.temp.toFixed(0)} ºC </span>
                           <span> { hourTime }h </span>
                         </div>
                       )

@@ -56,3 +56,13 @@ button, input, optgroup, select, textarea{
   align-content: space-between;
   justify-content: center;
 }
+@media only screen and (max-width: 600px) {
+  #menu .header {
+    display: flex;
+    flex-direction: column;
+  }
+    #titulo{
+      text-align: center;
+      padding-bottom: 20px;
+    }
+}
