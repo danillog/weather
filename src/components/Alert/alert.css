@@ -3,7 +3,7 @@
 }
 
 #alert .container{
-  background-color: #ff930c7a;
+  background-color: #000000ad;
 }
 
 #alert .weatherAlert{
@@ -14,18 +14,28 @@
 #alert .weatherAlert h3{
   font-size: x-large;
 }
-
+#alert .detailAlert{
+  background-color: #0000008f;
+}
 #alert .detailAlert h3{
   font-size: large;
   padding: 11px;
 }
 
 .pollution{
+  display: none;
+  flex-direction: column;
+  align-items: center;
   padding: 10px;
 }
 .pollution img{
+  display: block;
+  margin: 0 auto;
   width: 58px;
   filter: invert(1);
+}
+.pollution h3{
+  text-align: center;
 }
 .pollution .dayPollution{
   background: rgb(65,65,65);
@@ -34,4 +44,39 @@
   height: 30px;
   border-radius: 50%;
   margin: 10px auto;
+}
+.good{
+  background: rgb(65,65,65);
+  background: -moz-linear-gradient(298deg, rgba(65,65,65,1) 1%, rgba(60,238,9,1) 37%);
+  background: -webkit-linear-gradient(298deg, rgba(65,65,65,1) 1%, rgba(60,238,9,1) 37%);
+  background: linear-gradient(298deg, rgba(65,65,65,1) 1%, rgba(60,238,9,1) 37%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#414141",endColorstr="#3cee09",GradientType=1);
+}
+.fair{
+  background: rgb(65,65,65);
+  background: -moz-linear-gradient(298deg, rgba(65,65,65,1) 1%, rgba(218,238,9,1) 37%);
+  background: -webkit-linear-gradient(298deg, rgba(65,65,65,1) 1%, rgba(218,238,9,1) 37%);
+  background: linear-gradient(298deg, rgba(65,65,65,1) 1%, rgba(218,238,9,1) 37%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#414141",endColorstr="#daee09",GradientType=1);
+}
+.moderate{
+  background: rgb(65,65,65);
+  background: -moz-linear-gradient(298deg, rgba(65,65,65,1) 1%, rgba(238,136,9,1) 37%);
+  background: -webkit-linear-gradient(298deg, rgba(65,65,65,1) 1%, rgba(238,136,9,1) 37%);
+  background: linear-gradient(298deg, rgba(65,65,65,1) 1%, rgba(238,136,9,1) 37%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#414141",endColorstr="#ee8809",GradientType=1);
+}
+.bad{
+  background: rgb(65,65,65);
+  background: -moz-linear-gradient(298deg, rgba(65,65,65,1) 1%, rgba(238,70,9,1) 37%);
+  background: -webkit-linear-gradient(298deg, rgba(65,65,65,1) 1%, rgba(238,70,9,1) 37%);
+  background: linear-gradient(298deg, rgba(65,65,65,1) 1%, rgba(238,70,9,1) 37%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#414141",endColorstr="#ee4609",GradientType=1);
+}
+.veryBad{
+  background: rgb(65,65,65);
+  background: -moz-linear-gradient(298deg, rgba(65,65,65,1) 1%, rgba(238,9,9,1) 37%);
+  background: -webkit-linear-gradient(298deg, rgba(65,65,65,1) 1%, rgba(238,9,9,1) 37%);
+  background: linear-gradient(298deg, rgba(65,65,65,1) 1%, rgba(238,9,9,1) 37%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#414141",endColorstr="#ee0909",GradientType=1);
 }

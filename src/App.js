@@ -15,6 +15,7 @@ class App extends Component {
       lat: '0',
       lon: '0',
       weather: false,
+      pollution: false,
       options: [],
       typeInterval: 0,
     }
@@ -52,6 +53,10 @@ class App extends Component {
     let weather = await openWeather.weatherbyLocation(lat, lon);
     return weather;
   }
+  async pollutionNow(lat, lon){
+    let pollution = await openWeather.pollutionByLocation(lat, lon);
+    return pollution;
+  }
 
   async  sucessCurrentPosition(pos){  
     var crd = pos.coords;
@@ -60,12 +65,13 @@ class App extends Component {
     let weather = await openWeather.weatherbyLocation(local.lat, local.lon);
     let pollution = await openWeather.pollutionByLocation(local.lat, local.lon);
 
-      console.log(pollution);
+
     this.setState({
       city: city.["0"].address.city,
       lat: local.lat,
       lon: local.lon,
-      weather: weather
+      weather: weather,
+      pollution: pollution
     });
   }
 
@@ -80,12 +86,14 @@ class App extends Component {
     let cityLocation = await nominatim.searchByCity(city)
     let lat = cityLocation.["0"].lat;
     let lon = cityLocation.["0"].lon;
-    let weather = await this.weatherNow(lat, lon)
+    let weather = await this.weatherNow(lat, lon);
+    let pollution = await this.pollutionNow(lat, lon);
 
     this.setState({
       lat: lat,
       lon: lon,
-      weather: weather
+      weather: weather,
+      pollution: pollution
     })
   }
 
@@ -137,7 +145,7 @@ class App extends Component {
           </div>
         </div>
         <div id="conteudo">
-          <Alert weather={this.state.weather}/>
+          <Alert weather={this.state.weather} pollution={this.state.pollution}/>
           <div>
             <Seven weather={this.state.weather} />
           </div>
