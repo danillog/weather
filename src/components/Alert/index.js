@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import openWeather from '../../api/openWeather';
+import pollution from '../../assets/img/pollution.png';
 import './alert.css';
 
 class Alert extends Component{
@@ -26,6 +27,16 @@ class Alert extends Component{
               </div>
               <div className="row detailAlert justify-content-md-center">
                 <h3> O {alert.description} </h3>
+              </div>
+              <div  className="row pollution justify-content-md-center">
+                <div className="col-12 ">
+                  <img src={pollution} alt="pollution level"/>
+                  <h3> Poluição do ar</h3>
+                </div>
+                <div className="col-12">
+                  <div className="dayPollution"> 
+                  </div>
+                </div>
               </div>
             </div>
           )})}

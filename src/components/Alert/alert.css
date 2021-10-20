@@ -19,3 +19,19 @@
   font-size: large;
   padding: 11px;
 }
+
+.pollution{
+  padding: 10px;
+}
+.pollution img{
+  width: 58px;
+  filter: invert(1);
+}
+.pollution .dayPollution{
+  background: rgb(65,65,65);
+  background: linear-gradient(298deg, rgba(65,65,65,1) 1%, rgba(158,22,22,1) 37%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 10px auto;
+}

@@ -58,7 +58,9 @@ class App extends Component {
     let local ={lat: crd.latitude , lon:crd.longitude}
     let city = await nominatim.acessLocation(local.lat, local.lon)
     let weather = await openWeather.weatherbyLocation(local.lat, local.lon);
+    let pollution = await openWeather.pollutionByLocation(local.lat, local.lon);
 
+      console.log(pollution);
     this.setState({
       city: city.["0"].address.city,
       lat: local.lat,
