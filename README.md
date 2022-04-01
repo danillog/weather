@@ -1,14 +1,26 @@
-# A website that shows the weather
+# Sobre
 
-This site is create with ReactJS, Open Weahter API and Nomination API. 
+Essa ferreamente construída com ReactJS, acessa o Open Weahter API e nos diz a previsão do tempo de acordo com sua pesquisa ou sua localização, também utilizando o Nomination API.
 
-## Describe
+Eu construí essa ferramenta pois queria algo que se adaptasse com o horário do dia e também para me auxiliar nos passeios de bicicleta mais longos.
 
-I created this site to visualize the weather of different cities in the world, but with colors adaptable to my local time. 
-You can acesss at [clicking here](http://dgweather.site)
+Obs.: Esse é apenas um MVP o serviço final ainda está em construção
 
-### Why use nomination API ?
+## Acessando o Demo 
+Para acessar o demo é só [clicar aqui](http://dgweather.site) 
 
-In the first moment I created this project I needed the user to enter the name of the region in the search field and I found the geographic location through this information. The solution he found was to use the nomination API.
+## Como instalar?
 
-### 
+Importante antes de baixar o conteúdo tenha certeza que você possui ao menos o nodeJS instalado no seu computador.
+
+1. Para instalar baixe o conteúdo deste repositório ou faça um clone deste projeto;
+2. Faça a instalação das dependências utilizando o NPM, digite no seu terminal **npm i**;
+3. Por motivos de segurança a chave da API do Open Weather não está exposta, então gere este chave no site e coloque na pasta src/config no arquivo config.js no seguinte formato:
+    
+```javascript
+const key =  "colo aqui seu acesso"
+    export default key
+```
+ 
+4. Após todo este processo, no console digite **npm start** e o projeto irá iniciar no caminho http://localhost:3000;
+5. Envie um feedback, para que possamos melhorar este projeto. 
