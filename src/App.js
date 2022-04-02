@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import nominatim from './api/nominatim';
 import openWeather from './api/openWeather';
 import './App.css';
-import Alert from './components/Alert';
 import Footer from './components/Footer';
 import Seven from './components/Seven';
 import { weatherContext } from './components/weatherContext';
@@ -15,7 +14,7 @@ export default function App() {
   const [weather, setWeather] = useState(false);
   const [pollution, setPollution] = useState(false);
   const [options, setOptions] = useState([]);
-
+  const [typeInterval, setTypeInterval] = useState('')
   
 
   useEffect(() => {
@@ -52,10 +51,12 @@ export default function App() {
 
   async function sucessCurrentPosition(pos){  
     var crd = pos.coords;
-    let local ={setLat: crd.latitude , setLon:crd.longitude}
-    setCity = await nominatim.acessLocation(local.lat, local.lon)
-    setWeather = await openWeather.weatherbyLocation(local.lat, local.lon);
-    setPollution = await openWeather.pollutionByLocation(local.lat, local.lon);
+
+    setLat(crd.latitude);
+    setLon(crd.longitude);
+    setCity(await nominatim.acessLocation(lat, lon));
+    setWeather(await openWeather.weatherbyLocation(lat, lon));
+    setPollution(await openWeather.pollutionByLocation(lat, lon));
 
   }
 
@@ -63,26 +64,28 @@ export default function App() {
   async function getCity(e){
     e.preventDefault();
 
-    setWeather = false;
-    setPollution = false;
+    setWeather(false);
+    setPollution(false);
 
+    console.log("cidade local:")
+    
     let cityLocation = await nominatim.searchByCity(city)
-    setLat = cityLocation.["0"].lat;
-    setLon = cityLocation.["0"].lon;
-    setWeather = await this.weatherNow(lat, lon);
-    setPollution = await this.pollutionNow(lat, lon);
+    setLat(cityLocation.["0"].lat);
+    setLon(cityLocation.["0"].lon);
+    setWeather(await weatherNow(lat, lon));
+    setPollution(await pollutionNow(lat, lon));
 
   }
 
   function changecity(typed){
     let listCity = []
-    setCity = typed
+    setCity(typed);
     
-    if(this.state.typeInterval) clearTimeout(this.state.typeInterval)
-    this.state.typeInterval = setTimeout( async () => {
+    if(typeInterval) clearTimeout(typeInterval)
+    setTypeInterval(setTimeout( async () => {
       listCity = await searchCity(typed);
-      setOptions = listCity;
-    },200)
+      setOptions(listCity);
+    },200))
 
   }
 
@@ -95,7 +98,7 @@ export default function App() {
     return listResult
   }
     return(
-      <weatherContext.Provider value={weather}> 
+      <weatherContext.Provider value={ {weather: [weather, setWeather], pollution: [pollution, setPollution]}}> 
         <div className="App">
           <div id="menu">
           <div className="align-items-center row header"> 
@@ -120,7 +123,7 @@ export default function App() {
       </div>
           </div>
           <div id="conteudo">
-            <Alert />
+            
             <div>
               <Seven weather={weather} />
             </div>

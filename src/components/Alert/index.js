@@ -4,7 +4,7 @@ import './alert.css';
 
 export default function Alert(){
   const [weather, setWeather] = useContext(weatherContext);
-  const [pollution] = useContext(weatherContext);
+  const [pollution, setPollution] = useContext(weatherContext);
   const [currentPollution, setCurrentPollution] = useState('');
 
 
