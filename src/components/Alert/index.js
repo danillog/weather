@@ -1,27 +1,15 @@
-import { Component } from 'react';
-import pollution from '../../assets/img/pollution.png';
+import React, { useContext, useEffect, useState } from "react";
+import { weatherContext } from '../weatherContext';
 import './alert.css';
 
-class Alert extends Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      weatherAlert: false,
-      pollutionAlert: false
-    }
-  }
+export default function Alert(){
+  const [weather, setWeather] = useContext(weatherContext);
+  const [pollution] = useContext(weatherContext);
+  const [currentPollution, setCurrentPollution] = useState('');
 
-  componentDidMount(){
-    this.setState({
-      pollutionAlert: this.props.pollution
-    })
-    console.log(this.props.pollution)
-    console.log(this.props.weather)
-  }
 
-  airQuality(){
-    if(this.state.pollutionAlert !== false){
-      let pollution = this.state.pollutionAlert
+  useEffect(() => {
+    if(pollution !== false){
       let levelAir = 0
       pollution.map((air) => {
        levelAir = air.main.aqi
@@ -29,52 +17,59 @@ class Alert extends Component{
       console.log(pollution)
       switch(levelAir){
         case '1': {
-          return(<div className="dayPollution good"> </div>)
+          setCurrentPollution(<div className="dayPollution good"> </div>)
+          break;
         }
         case '2': {
-          return(<div className="dayPollution fair"> </div>)
+          setCurrentPollution(<div className="dayPollution fair"> </div>)
+          break;
         }
         case '3': {
-          return(<div className="dayPollution moderate"> </div>)
+          setCurrentPollution(<div className="dayPollution moderate"> </div>)
+          break;
         }
         case '4': {
-          return(<div className="dayPollution bad"> </div>)
+          setCurrentPollution(<div className="dayPollution bad"> </div>)
+          break;
         }
         case '5': {
-          return(<div className="dayPollution veryBad"> </div>)
+          setCurrentPollution(<div className="dayPollution veryBad"> </div>)
+          break;
         }
 
       }
     }
-  }
+  })
 
-  render(){
-    
-    return this.props.weather !== false & this.props.weather !== undefined  & this.props.weather.alerts !== undefined & this.props.pollution !== false ?(
-        <div id="alert">
-        { this.props.weather.alerts.map((alert, index ) => {
-          return( 
-            <div className="container" key={ index } >    
-              <div className="row weatherAlert justify-content-md-center">
-                <h3> { alert.event } </h3>
-              </div>
-              <div className="row detailAlert justify-content-md-center">
-                <h3> O {alert.description} </h3>
-              </div>
-              <div  className="row pollution justify-content-md-center">
-                <div className="col-4 ">
-                  <img src={pollution} alt="pollution level"/>
-                  <h3> Poluição do ar</h3>
-                </div>
-                <div className="col-4">
-                {this.airQuality()}
-              </div>
-              </div>
-            </div>
-          )})}
+  return weather !== false & weather !== undefined  & weather.alerts !== undefined & pollution !== false ?(
+    <div id="alert">
+      <div className="container">
+        <div className="row weatherAlertTitle justify-content-md-center">
+          <h2> Alertas nacionais para sua região </h2>
         </div>
-    ) :  <h1>  </h1>
-  }
-}
+      </div>
+    { weather.alerts.map((alert, index ) => {
+      return( 
+        <div className="container" key={ index } >    
+          <div className="row weatherAlert justify-content-md-center">
+            <h3> { alert.event } </h3>
+          </div>
+          <div className="row detailAlert justify-content-md-center">
+            <h3> O {alert.description} </h3>
+          </div>
+        </div>
+      )})}
+      <div  className="row pollution justify-content-md-center">
+            <div className="col-4 ">
+              <img src={pollution} alt="pollution level"/>
+              <h3> Poluição do ar</h3>
+            </div>
+            <div className="col-4">
+              {currentPollution}
+            </div>
+      </div>
 
-export default Alert;
+    </div>
+  ) :  <h1>  </h1>
+  
+}

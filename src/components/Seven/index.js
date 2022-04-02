@@ -87,7 +87,7 @@ class Seven extends Component{
                   <h3> Probabilidade chuva: {(day.pop * 100).toFixed(0)}% </h3>
                 </div>
                 <div className="col col-lg-3 prob">
-                  <h3>{day.rain}mm </h3>
+                  <h3>Precipitação: {day.rain}mm </h3>
                 </div>
               </div>
               <Slider { ...settings}  >

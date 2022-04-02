@@ -17,16 +17,26 @@ class Menu extends Component{
 
   render(){
     return(
-        <div id="menu">
-          <div className="justify-content-center row"> 
-          <div className="col">
-            <h2> TEST</h2>
-          </div>
-            <div className="col"> 
-            
+      <div className="align-items-center row header"> 
+      <div className="col">
+        <h1 id="titulo"> DG-WEATHER</h1>
+      </div>
+        <div className="col"> 
+          <form onSubmit={this.getCity} id="buscar" >
+            <input type="txt" autoComplete="off" list="datalistOptions" autoFocus value={this.state.city}
+            onChange={(e) => this.changecity(e.target.value)} placeholder="Digite sua cidade" />
+            <div id="datalistOptions" >
+              {this.state.options.map((option, index) =>{
+                return(
+                  <div className="cityOption" key={index} onClick={() => this.changecity(option)}  >
+                    <button>  {option} </button>
+                </div>
+                )}  
+              )}
             </div>
-          </div>
+          </form>
         </div>
+      </div>
     );
   }
 }

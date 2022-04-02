@@ -18,7 +18,7 @@ Importante antes de baixar o conteúdo tenha certeza que você possui ao menos o
 3. Por motivos de segurança a chave da API do Open Weather não está exposta, então gere este chave no site e coloque na pasta src/config no arquivo config.js no seguinte formato:
     
 ```javascript
-const key =  "colo aqui seu acesso"
+const key =  "cole aqui seu acesso"
     export default key
 ```
  
