@@ -1,5 +1,5 @@
 import { getHours } from 'date-fns';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import nominatim from './api/nominatim';
 import openWeather from './api/openWeather';
 import './App.css';
@@ -38,29 +38,34 @@ export default function App() {
     document.body.style.backgroundColor = color;
     document.getElementById("menu").style.background = colorMenu;
     document.getElementById("footer").style.background = colorMenu;
-  });
+    navigator.geolocation.getCurrentPosition(sucessCurrentPosition);
 
-   async function weatherNow(lat, lon){
+  }, []);
+
+
+  async function weatherNow(lat, lon){
     let weather = await openWeather.weatherbyLocation(lat, lon);
     return weather;
+    console.log("chamei o weahterNow");
   }
   async function pollutionNow(lat, lon){
     let pollution = await openWeather.pollutionByLocation(lat, lon);
     return pollution;
+    console.log("chamei o weatherpollution");
   }
 
-  async function sucessCurrentPosition(pos){  
-    var crd = pos.coords;
-
-    setLat(crd.latitude);
-    setLon(crd.longitude);
-    setCity(await nominatim.acessLocation(lat, lon));
-    setWeather(await openWeather.weatherbyLocation(lat, lon));
-    setPollution(await openWeather.pollutionByLocation(lat, lon));
-
-  }
-
-
+  const sucessCurrentPosition = useCallback( async(pos) =>{  
+    let crd = pos.coords;
+    let latitude = crd.latitude;
+    let longitude = crd.longitude ;
+    setLat(latitude);
+    setLon(longitude);
+    setCity(await nominatim.acessLocation(latitude, longitude));
+    setWeather(await openWeather.weatherbyLocation(latitude, longitude));
+    setPollution(await openWeather.pollutionByLocation(latitude, longitude));
+    console.log("chamei o succesCurrentPosition");
+  },[lat, lon, city, weather, pollution]);
+  
   async function getCity(e){
     e.preventDefault();
 
@@ -74,10 +79,10 @@ export default function App() {
     setLon(cityLocation.["0"].lon);
     setWeather(await weatherNow(lat, lon));
     setPollution(await pollutionNow(lat, lon));
-
+    console.log("chamei o getCity");
   }
 
-  function changecity(typed){
+  const changecity = useCallback((typed)=>{
     let listCity = []
     setCity(typed);
     
@@ -85,9 +90,9 @@ export default function App() {
     setTypeInterval(setTimeout( async () => {
       listCity = await searchCity(typed);
       setOptions(listCity);
-    },200))
-
-  }
+    },300))
+    console.log("chamei o changeCity");
+  }, [city ,options, typeInterval])
 
   async function searchCity(typed){
     let typedSearch = await nominatim.seekingCity(typed)
@@ -95,10 +100,11 @@ export default function App() {
     typedSearch.map((city) => {
       listResult.push(`${city.address.city}, ${city.address.state}, ${city.address.country}`)    
     })
+    console.log("chamei o searchCity");
     return listResult
   }
     return(
-      <weatherContext.Provider value={ {weather: [weather, setWeather], pollution: [pollution, setPollution]}}> 
+      <weatherContext.Provider value={ weather }> 
         <div className="App">
           <div id="menu">
           <div className="align-items-center row header"> 
@@ -123,7 +129,8 @@ export default function App() {
       </div>
           </div>
           <div id="conteudo">
-            
+            <div>
+            </div>
             <div>
               <Seven weather={weather} />
             </div>

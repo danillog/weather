@@ -3,8 +3,8 @@ import { weatherContext } from '../weatherContext';
 import './alert.css';
 
 export default function Alert(){
-  const [weather, setWeather] = useContext(weatherContext);
-  const [pollution, setPollution] = useContext(weatherContext);
+  const {weather} = useContext(weatherContext);
+  const {pollution} = useContext(weatherContext);
   const [currentPollution, setCurrentPollution] = useState('');
 
 
@@ -39,8 +39,8 @@ export default function Alert(){
 
       }
     }
-  })
-
+  }, []);
+  
   return weather !== false & weather !== undefined  & weather.alerts !== undefined & pollution !== false ?(
     <div id="alert">
       <div className="container">
@@ -70,6 +70,6 @@ export default function Alert(){
       </div>
 
     </div>
-  ) :  <h1>  </h1>
+  ) :  <div>  </div>
   
 }

@@ -34,6 +34,8 @@ class nominatim{
     .then((json) =>  { return json })  
 
     let dataCity =   requestCity.then(result =>{ return result }, err => {  dataCity = err });
+    console.log("Estamos na cidade:  " +  dataCity)
+    console.log(requestCity)
     return dataCity
   }
   

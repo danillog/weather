@@ -1,7 +1,6 @@
-import React from "react";
+import { createContext } from "react";
 
 
-export const weatherContext = React.createContext({
-    weather: false,
-    pollution: false
+export const weatherContext = createContext({
+    weather: false
 });
